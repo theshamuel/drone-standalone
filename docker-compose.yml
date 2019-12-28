@@ -1,0 +1,50 @@
+version: '2'
+
+services:
+    drone_db:
+        image: postgres:12.1-alpine
+        container_name: "drone_db"
+        hostname: "drone_db"
+        restart: always
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"
+        environment:
+          - POSTGRES_USER
+          - POSTGRES_PASSWORD
+        volumes:
+          - /var/drone/db:/var/lib/postgresql/data
+    
+    drone_server:
+        image: drone/drone:1
+        container_name: "drone_server"
+        hostname: "drone_server"
+        restart: always
+        logging:
+          driver: json-file
+          options:
+              max-size: "10m"
+              max-file: "5"
+        ports:
+          - "8080:80"             
+        environment:
+          - DRONE_GITHUB_SERVER
+          - DRONE_GITHUB_CLIENT_ID
+          - DRONE_GITHUB_CLIENT_SECRET
+          - DRONE_RUNNER_CAPACITY
+          - DRONE_RUNNER_NAME
+          - DRONE_HOST
+          - DRONE_SERVER_HOST
+          - DRONE_SERVER_PROTO
+          - DRONE_TLS_AUTOCERT=false
+          - DRONE_ADMIN
+          - DRONE_USER_CREATE
+          - DRONE_UI_USERNAME
+          - DRONE_UI_PASSWORD
+          - DRONE_DATABASE_DATASOURCE
+          - DRONE_DATABASE_DRIVER
+        volumes: 
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /var/drone/server:/data
