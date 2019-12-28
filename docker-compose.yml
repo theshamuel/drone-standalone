@@ -16,8 +16,6 @@ services:
           - POSTGRES_PASSWORD
         volumes:
           - /var/drone/db:/var/lib/postgresql/data
-        networks:
-          - drone_network
     
     drone_server:
         image: drone/drone:1
@@ -50,9 +48,8 @@ services:
         volumes: 
           - /var/run/docker.sock:/var/run/docker.sock
           - /var/drone/server:/data
-        networks:
-          - drone_network
 
 networks:
-  drone_network:
-   name: ${NETWORK_NAME}
+  default:
+    external:
+      name: ${NETWORK_NAME}
