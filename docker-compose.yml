@@ -45,12 +45,11 @@ services:
           - DRONE_UI_PASSWORD
           - DRONE_DATABASE_DATASOURCE
           - DRONE_DATABASE_DRIVER
-          - DRONE_DEBUG
-          - DRONE_TRACE
           - DRONE_LOGS_DEBUG
-          - DRONE_LOGS_TEXT=true
-          - DRONE_LOGS_PRETTY=true
-          - DRONE_LOGS_COLOR=true
+          - DRONE_LOGS_TRACE
+          - DRONE_LOGS_TEXT
+          - DRONE_LOGS_PRETTY
+          - DRONE_LOGS_COLOR
           - DRONE_DATADOG_ENABLED
 
         volumes: 
