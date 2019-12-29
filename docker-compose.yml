@@ -51,6 +51,7 @@ services:
           - DRONE_LOGS_PRETTY
           - DRONE_LOGS_COLOR
           - DRONE_DATADOG_ENABLED
+          - DRONE_DATABASE_SECRET
 
         volumes: 
           - /var/run/docker.sock:/var/run/docker.sock
